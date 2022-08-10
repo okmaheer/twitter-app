@@ -1,5 +1,5 @@
 <template>
-        <form>
+        <form @submit.prevent="handlerSubmit">
           <div class="flex flex-row items-center justify-center lg:justify-start">
             <p class="text-lg text-white mb-0 mr-4">Sign in with</p>
             <button
@@ -47,6 +47,7 @@
           <div class="mb-6">
             <input
               type="text"
+              v-model="email"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-black bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
               id="email"
               placeholder="Email,username"
@@ -59,6 +60,7 @@
               type="password"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-black bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
               id="password"
+              v-model="password"
               placeholder="Password"
             />
           </div>
@@ -79,7 +81,7 @@
 
           <div class="text-center lg:text-left">
             <button
-              type="button"
+              type="submit"
               class="inline-block px-7 py-3 font-medium bg-white text-black text-sm leading-snug uppercase rounded shadow-md hover:bg-black hover:text-white hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
             >
               Login
@@ -95,3 +97,44 @@
           </div>
         </form>
 </template>
+<script>
+import { ref} from 'vue'
+import axios from 'axios'
+import {  useRouter } from 'vue-router'
+export default {
+   setup () {
+       const router = useRouter()
+           const email = ref('');
+              const password = ref('');
+
+      const handlerSubmit = async  ()=>{ 
+        try{
+                const data = {
+                   email:email.value,
+                   password:password.value 
+                } 
+                console.log(data);
+                 
+                const res = await axios.post('http://localhost:3000/v1/login',data)
+                console.log(res);
+             if(res.data.isUser == true){
+              router.push('/');
+             }
+          
+                       
+        }
+        catch{
+                  console.log("Error in Login Form");      
+                           }
+      }
+    
+
+    return {
+    
+          email,
+          password,
+          handlerSubmit
+    }
+  }
+}
+</script>
