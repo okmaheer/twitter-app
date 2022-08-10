@@ -15,12 +15,15 @@
 <script >
 import TheLoginForm from '../components/TheLoginForm.vue'
 export default {
+   components: {
+            TheLoginForm,
+    },
   setup () {
     
 
     return {
     
-      TheLoginForm
+     
     }
   }
 }

@@ -8,12 +8,15 @@
 <script >
 import TheSignupForm from '../components/TheSignupForm.vue'
 export default {
+   components: {
+            TheSignupForm,
+    },
   setup () {
     
 
     return {
     
-      TheSignupForm
+      
     }
   }
 }
