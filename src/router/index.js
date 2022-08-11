@@ -1,55 +1,89 @@
-import { createRouter, createWebHistory } from 'vue-router'
+
+import { createRouter as createVueRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
+import { useAuthStore } from '../store'
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
     iconClass: 'fas fa-home',
-    mainMenu: true
+    mainMenu: true,
+    meta: { requiresAuth: true }
   },
   {
     path: '/explore',
     name: 'Explore',
     component: Home,
     iconClass: 'fas fa-search',
-    mainMenu: true
+    mainMenu: true,
+    meta: { requiresAuth: true },
   },
   {
     path: '/notifications',
     name: 'Notifications',
     component: Home,
     iconClass: 'fas fa-bell',
-    mainMenu: true
+    mainMenu: true,
+    meta: { requiresAuth: true }
   },
   {
     path: '/messages',
     name: 'Messages',
     component: Home,
     iconClass: 'fas fa-envelope',
-    mainMenu: true
+    mainMenu: true,
+    meta: { requiresAuth: true }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true },
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { requiresNotAuth: true }
   },  {
     path: '/signup',
     name: 'Signup',
-    component: Signup
+    component: Signup,
+    meta: { requiresNotAuth: true }
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
 
-export default router
+export const createRouter = () => {
+  const authStore = useAuthStore()
+  let router = createVueRouter({
+      history: createWebHistory(process.env.BASE_URL),
+      routes: routes,
+     
+  })
+  router.beforeEach(guard => {
+
+      
+      if (guard.meta.requiresAuth && !authStore.isAuth) {
+     
+          return {
+              name: 'Login',
+              // save the location we were at to come back later
+              query: { redirect: guard.fullPath },
+          }
+      }
+      console.log(guard.meta.requiresNotAuth,authStore.isAuth)
+      if (guard.meta.requiresNotAuth && authStore.isAuth) {
+        console.log(guard.meta.requiresNotAuth,authStore.isAuth)
+          return {
+              name: 'Home',
+          }
+      }
+      
+  })
+  return router
+}
