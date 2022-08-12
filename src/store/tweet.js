@@ -86,9 +86,10 @@ export const usetweetStore = defineStore("tweet", {
     }
   },
   async tweetLikeAction(_id) {
-   
+    const authStore = useAuthStore();
   const data = {
-    _id
+    _id,
+    email: authStore.getUser.email,
   };
   try {
     const response = await axios.post(
