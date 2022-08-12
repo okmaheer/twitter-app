@@ -1,7 +1,7 @@
 const express = require('express')
 
 // controller functions
-const { addTweet, geTweets } = require('../controllers/tweetController')
+const { addTweet, geTweets ,addTweetLike } = require('../controllers/tweetController')
 
 const router = express.Router()
 
@@ -10,5 +10,7 @@ router.post('/add-tweet', addTweet)
 
 // get tweet
 router.get('/get-tweet', geTweets)
+
+router.post('/add-tweet-like', addTweetLike)
 
 module.exports = router
