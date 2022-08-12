@@ -28,7 +28,7 @@ const geTweets = async (req, res) => {
 
 
 
-// login a user
+// like tweet
 const addTweetLike = async (req, res) => {
   const {_id,email} = req.body
 
