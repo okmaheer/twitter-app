@@ -99,7 +99,7 @@ export const usetweetStore = defineStore("tweet", {
     console.log(response);
     if (response.status === 200) {
         console.log(response);
-      this.UPDATE_Tweet(response.data.tweet);
+      this.tweetgetAction();
       notify({
         title: "Tweet Successfully Liked",
         type: "success",
