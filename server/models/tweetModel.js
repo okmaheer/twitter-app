@@ -8,6 +8,7 @@ const tweetSchema = new Schema({
   tweet: String,
   likes:Number,
   user: {},
+  likedPersons:{}
 })
 
 // static signup method
@@ -29,5 +30,33 @@ tweetSchema.statics.getTweet = async function() {
 
   return tweets
 }
+tweetSchema.statics.addTweetLike = async function(_id,email) {
+
+  // validation
+  if (!_id || !email) {
+    throw Error('Failed to like Tweet')
+  }
+
+  const tweet = await this.find({likedPersons:email})
+  
+      if(!tweet){
+     
+     const unlikedtweet =  await this.findById({ _id})
+      
+      if(unlikedtweet.likes){
+        unlikedtweet.likes += 1
+      }else{
+        unlikedtweet.likes = 1
+      }
+     
+      unlikedtweet.save()
+      return unlikedtweet;
+    }
+
+    throw Error('Already like the Tweet')
+
+   
+}
+
 
 module.exports = mongoose.model('Tweet', tweetSchema)
