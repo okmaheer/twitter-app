@@ -70,7 +70,7 @@
               "
               @click="likeHandler(tweet._id)"
             ></i>
-            <span>{{ tweet.length }}</span>
+            <span>{{ tweet.likes?.length }}</span>
           </div>
           <div class="text-gray-500">
             <i
