@@ -30,9 +30,9 @@ userSchema.statics.signup = async function(email, password , name) {
   if (!validator.isEmail(email)) {
     throw Error('Email not valid')
   }
-  // if (!validator.isStrongPassword(password)) {
-  //   throw Error('Password not strong enough')
-  // }
+  if (!validator.isStrongPassword(password)) {
+    throw Error('Password not strong enough')
+  }
 
   const exists = await this.findOne({ email })
 
@@ -50,7 +50,7 @@ userSchema.statics.signup = async function(email, password , name) {
 
 // static login method
 userSchema.statics.login = async function(email, password) {
-
+   
   if (!email || !password) {
     throw Error('All fields must be filled')
   }
