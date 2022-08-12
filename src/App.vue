@@ -7,9 +7,10 @@
       </router-link>
 
       <h1 class="text-white font-black text-xl">{{ $route.name }}</h1>
-      <button class="text-xl mr-4 font-bold text-white" @click="logoutHandler">
+      <button class="text-xl mr-4 font-bold text-white" v-if="authStore.isAuth" @click="logoutHandler">
         Logout
       </button>
+      <a href="" v-else></a>
     </header>
 
     <main class="flex-1 overflow-y-scroll">
