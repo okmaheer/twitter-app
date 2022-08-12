@@ -18,7 +18,7 @@
           class="
             block
             border border-grey-light
-           text-white
+           text-gray-600
             w-full
             p-3
             rounded
@@ -35,7 +35,7 @@
             block
             border border-grey-light
             w-full
-           text-white
+            text-gray-600
             p-3
             rounded
             mb-4
@@ -50,7 +50,7 @@
           class="
             block
             border border-grey-light
-           text-white
+            text-gray-600
             w-full
             p-3
             rounded
@@ -66,7 +66,7 @@
           
             block
             border border-grey-light
-           text-white
+            text-gray-600
             w-full
             p-3
             rounded
