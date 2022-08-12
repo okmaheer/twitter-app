@@ -1,14 +1,16 @@
 <template>
   <div class="home">
+      
     <Tweet 
-      v-for="tweet in tweets" 
-      :key="tweet._id" 
+      v-for="(tweet, index) in tweetStore.getTweets" 
+      :key="index" 
       :tweet="tweet" />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from "vue";
+import { usetweetStore } from "../store/tweet";
 import Tweet from '../components/Tweet';
 import vweets from '../vweets';
 
@@ -17,10 +19,16 @@ export default {
             Tweet,
     },
   setup () {
+    const tweetStore = usetweetStore()
     const tweets = ref(vweets);
-
+     onMounted( async () => {
+      const tweetStore = usetweetStore()
+      const res = await tweetStore.tweetgetAction()
+      console.log(res);
+})
     return {
       tweets,
+      tweetStore,
     }
   }
 }
