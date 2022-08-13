@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Profile from '../views/Profile.vue'
+import Chat from '../views/Chat.vue'
 import { useAuthStore } from '../store'
 
 const routes = [
@@ -34,7 +35,7 @@ const routes = [
   {
     path: '/messages',
     name: 'Messages',
-    component: Home,
+    component: Chat,
     iconClass: 'fas fa-envelope',
     mainMenu: true,
     meta: { requiresAuth: true }
