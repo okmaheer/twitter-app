@@ -9,25 +9,27 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { usetweetStore } from "../store/tweet";
 import Tweet from '../components/Tweet';
-import vweets from '../vweets';
+import io from 'socket.io-client';
 
 export default {
      components: {
             Tweet,
     },
   setup () {
+    const socket = io("http://localhost:3000"); 
     const tweetStore = usetweetStore()
-    const tweets = ref(vweets);
+  
      onMounted( async () => {
+       console.log(socket);
       const tweetStore = usetweetStore()
       const res = await tweetStore.tweetgetAction()
       console.log(res);
 })
     return {
-      tweets,
+    
       tweetStore,
     }
   }
