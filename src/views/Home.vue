@@ -12,7 +12,7 @@
 import { onMounted } from "vue";
 import { usetweetStore } from "../store/tweet";
 import Tweet from '../components/Tweet';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 export default {
      components: {
