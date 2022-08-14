@@ -5,7 +5,7 @@
       v-for="(tweet, index) in tweetStore.getTweets" 
       :key="index" 
       :tweet="tweet" />
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
