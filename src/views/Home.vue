@@ -19,7 +19,7 @@ export default {
             Tweet,
     },
   setup () {
-    // const socket = io("http://localhost:3000"); 
+    const socket = io("http://localhost:3000"); 
     const tweetStore = usetweetStore()
   
      onMounted( async () => {
